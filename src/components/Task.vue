@@ -14,13 +14,6 @@ export default {
   props: {
     task: Object,
   },
-  // methods: {
-  //   onDel(id) {
-  //     //we catch this emmit on the next level up
-  //     this.$emit("delete-task", id);
-  //     // console.log(id)
-  //   },
-  // },
 };
 </script>
 
