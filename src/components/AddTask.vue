@@ -35,8 +35,12 @@ export default {
       text: "",
       day: "",
       reminder: false,
+      textHis: "",
+      dayHis: "",
+      reminderHis: false,
     };
   },
+  // emits: ['add-task', 'add-history'],
   methods: {
     onSubmit(e) {
       e.preventDefault();
@@ -44,22 +48,32 @@ export default {
         alert("Please add a task");
         return;
       }
-
+      // code will not be super dry but it is a test
       const newTask = {
-
         // id: Math.floor(Math.random() * 100000),
         text: this.text,
         day: this.day,
         reminder: this.reminder,
       };
+      const newTaskHis = {
+        // id: Math.floor(Math.random() * 100000),
+        textHis: this.text,
+        dayHis: this.day,
+        reminderHis: this.reminder,
+      };
       
       this.$emit('add-task', newTask)
-
+      this.$emit('add-history', newTaskHis)
+      
       this.text = "",
       this.day = "",
-      this.reminder = false
+      this.reminder = false,    
+      this.textHis = "",
+      this.dayHis = "",
+      this.reminderHis = false
     },
   },
+  
 };
 </script>
 

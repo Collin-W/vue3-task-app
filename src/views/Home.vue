@@ -1,6 +1,11 @@
+<!-- TODO: 
+Would like to combid addHistory and addTask in once func -->
+
 <template>
   
-    <AddTask v-show="showAddTask"  @add-task="addTask" />
+    <AddTask v-show="showAddTask"     
+    @add-history="addHistory"
+    @add-task="addTask"/>
 
   <Tasks
     @toggle-reminder="toggleReminder"
@@ -24,7 +29,8 @@ export default {
   },
   data() {
     return{
-        tasks: []
+        tasks: [],
+        history:[]
     }
   },
   methods: {
@@ -35,6 +41,8 @@ export default {
       return data;
     },
     async addTask(task) {
+      console.log('add tis');
+      //could I use a for loop to post to history and tasks ??
       const res = await fetch("api/tasks", {
         method: "POST",
         headers: {
@@ -83,10 +91,33 @@ export default {
       return data;
     },
     // CRUD routes end
+    async fetchHistory() {
+        const res = await fetch("api/history");
+        const data = await res.json();
+        console.log(data + ' his data')
+        return data;
+      },
+      // add to history route start
+  async addHistory(task) {
+    console.log('add his');
+      const res = await fetch("api/history", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(task),
+      });
+      const data = await res.json();
+      this.history = [...this.history, data];
+     
+    },
+  // add to history route end
   },
+  
      //on start grab all data to populate task app
     async created() {
-    this.tasks = await this.fetchTasks();
-  },
+      this.history = await this.fetchHistory();
+      this.tasks = await this.fetchTasks();
+  }
 };
 </script>
