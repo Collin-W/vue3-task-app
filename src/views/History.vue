@@ -27,13 +27,17 @@ export default {
       console.log('entered history fetch on history.vue')
       const res = await fetch("api/history");
       const data = await res.json();
+
+      console.log(data)
       return data;
+
+
     },
   
   },
   async mounted() {
       console.log('created history ')
-      this.history = await this.fetchHistory();
+      this.historyItems = await this.fetchHistory();
   //    // add to history route start
   // async addHistory(task) {
   //     const res = await fetch("api/history", {

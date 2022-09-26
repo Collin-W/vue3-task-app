@@ -18,4 +18,3 @@ export default {
   emits: ['delete-task', 'toggle-reminder']
 };
 </script>
-<!-- @45:51  https://youtu.be/qZXt1Aom3Cs?t=2751-->
